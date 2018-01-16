@@ -46,8 +46,9 @@ EMGstarter(5) = 2981;
 EMGender(5) = 9303;
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181,1);    
     for j = 1:5  
         eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
         eval(['posY = Motion.trial', num2str(j), '(:,', num2str(i*2), ');'])
@@ -57,22 +58,31 @@ for i = 1:2
         plot(Motionlen,pos, 'k')
         hold on   
     end
-    plot(Motionlen,averageMotion/5, 'r', 'LineWidth',2)
+    plot(Motionlen, averageMotion/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/5, 'r', 'LineWidth',2)
+    hold on  
 end
 
+averageEMG = zeros(3468,7);
 for i = 3:9
+   figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 1:5    
       eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
       EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
       EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
       EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-      averageEMG = averageEMG + EMGtemp;
+      averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
       plot(EMGlen, EMGtemp, 'k')
       hold on  
    end
-   plot(EMGlen,averageEMG/5, 'r', 'LineWidth',2)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+    hold on  
 end
 
 
@@ -102,8 +112,9 @@ EMGstarter(10) = 2427;
 EMGender(10) = 9606;
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181,1);
     for j = 6:10  
         eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
         eval(['posY = Motion.trial', num2str(j), '(:,', num2str(i*2), ');'])
@@ -114,21 +125,30 @@ for i = 1:2
         hold on   
     end
     plot(Motionlen,averageMotion/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/5, 'g', 'LineWidth',2)
+    hold on  
 end
 
+averageEMG = zeros(3468, 7);
 for i = 3:9
+    figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 6:10     
       eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
       EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
       EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
       EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-      averageEMG = averageEMG + EMGtemp;
+      averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
       plot(EMGlen, EMGtemp, 'k')
       hold on  
    end
-   plot(EMGlen,averageEMG/5, 'r', 'LineWidth',2)
+   plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+   figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'g', 'LineWidth',2)
+    hold on  
 end
 
 
@@ -163,8 +183,9 @@ for i = 11:15
 end
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181, 1);
     for j = 11:15  
         eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
         eval(['posY = Motion.trial', num2str(j), '(:,', num2str(i*2), ');'])
@@ -175,21 +196,30 @@ for i = 1:2
         hold on   
     end
     plot(Motionlen,averageMotion/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/5, 'b', 'LineWidth',2)
+    hold on 
 end
 
+averageEMG = zeros(3468,7);
 for i = 3:9
+    figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 11:15     
       eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
       EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
       EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
       EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-      averageEMG = averageEMG + EMGtemp;
+      averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
       plot(EMGlen, EMGtemp, 'k')
       hold on  
    end
-   plot(EMGlen,averageEMG/5, 'r', 'LineWidth',2)
+   plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'b', 'LineWidth',2)
+    hold on  
 end
 
 %% plot 60-2000
@@ -223,8 +253,9 @@ for i = 16:20
 end
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181,1);
     for j = 16:20  
         eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
         eval(['posY = Motion.trial', num2str(j), '(:,', num2str(i*2), ');'])
@@ -235,24 +266,31 @@ for i = 1:2
         hold on   
     end
     plot(Motionlen,averageMotion/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/5, 'k', 'LineWidth',2)
+    hold on 
 end
 
+averageEMG = zeros(3468,7);
 for i = 3:9
+   figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 16:20     
       eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
       EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
       EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
       EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-      averageEMG = averageEMG + EMGtemp;
+      averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
       plot(EMGlen, EMGtemp, 'k')
       hold on  
    end
-   plot(EMGlen,averageEMG/5, 'r', 'LineWidth',2)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'k', 'LineWidth',2)
+    hold on  
 end
-
-
 
 
 
@@ -287,8 +325,9 @@ for i = 21:25
 end
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181,1);
     for j = 21:25  
         eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
         eval(['posY = Motion.trial', num2str(j), '(:,', num2str(i*2), ');'])
@@ -299,21 +338,30 @@ for i = 1:2
         hold on   
     end
     plot(Motionlen,averageMotion/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/5, 'b', 'LineWidth',2)
+    hold on 
 end
 
+averageEMG = zeros(3468,7);
 for i = 3:9
+   figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 21:25   
       eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
       EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
       EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
       EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-      averageEMG = averageEMG + EMGtemp;
+      averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
       plot(EMGlen, EMGtemp, 'k')
       hold on  
    end
-   plot(EMGlen,averageEMG/5, 'r', 'LineWidth',2)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/5, 'b', 'LineWidth',2)
+    hold on  
 end
 
 
@@ -348,8 +396,9 @@ for i = 26:30
 end
 
 for i = 1:2
+    figure(1);
     subplot(5,2,i)
-    averageMotion = zeros(1,181);
+    averageMotion = zeros(181,1);
     for j = 26:30 
         if velstarter(j)>50
             eval(['posX = Motion.trial', num2str(j), '(:,', num2str(i*2-1), ');'])
@@ -362,23 +411,32 @@ for i = 1:2
         end   
     end
     plot(Motionlen,averageMotion/4, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(Motionlen, averageMotion/4, 'k', 'LineWidth',2)
+    hold on 
 end
 
+averageEMG = zeros(3468,7);
 for i = 3:9
+   figure(1);
    subplot(5,2,i)
-   averageEMG = zeros(1,3468);
    for j = 26:30
       if velstarter(j)>50
           eval(['[EMG_bp,EMG_rt,EMG_lp_20,EMG_lp_6] = EMG_Process(1000*EMG.trial', num2str(j), '(:,', num2str((i-3)*8+2), '),100, 1926, 2);'])
           EMGtemp = EMG_lp_20(EMGstarter(j):EMGender(j));
           EMGstartpos = round(velstarter(j)/100 * EMGfs + FrontTime * EMGfs);
           EMGtemp = EMGtemp(EMGstartpos: round(EMGstartpos + TotalTime * EMGfs));
-          averageEMG = averageEMG + EMGtemp;
+          averageEMG(:,i-2) = averageEMG(:,i-2) + EMGtemp;
           plot(EMGlen, EMGtemp, 'k')
           hold on 
       end
    end
-   plot(EMGlen,averageEMG/4, 'r', 'LineWidth',2)
+    plot(EMGlen, averageEMG(:,i-2)/4, 'r', 'LineWidth',2)
+    figure(2);
+    subplot(5,2,i)
+    plot(EMGlen, averageEMG(:,i-2)/4, 'k', 'LineWidth',2)
+    hold on 
 end
 
 
