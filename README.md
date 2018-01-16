@@ -1,3 +1,4 @@
 # M2process
 
-plot displacement, velocity and EMG.
+Plot displacement, velocity and EMG.(HHQ1204.m)
+Calculate synergy.(HHQ1204syn.m)
